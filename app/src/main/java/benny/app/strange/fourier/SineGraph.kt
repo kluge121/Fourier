@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlin.math.sin
 
 @Composable
@@ -30,9 +31,11 @@ fun SineWave(
 ) {
     val path = remember { Path() }
 
-    Canvas(modifier = modifier
-        .fillMaxWidth()
-        .padding(horizontal = 24.dp, vertical = 32.dp)) {
+    Canvas(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp, vertical = 32.dp)
+    ) {
         val xScale = size.width / 10f
         val yScale = size.height / 10f
 
@@ -128,32 +131,35 @@ fun SineWaveControls(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(start = 64.dp, end = 64.dp, top = 16.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("amplitude $amplitude", style = MaterialTheme.typography.labelMedium)
+        Text(
+            "amplitude $amplitude",
+            style = MaterialTheme.typography.labelMedium.copy(fontSize = 18.sp)
+        )
         Slider(
             value = amplitude,
-            onValueChange = onAmplitudeChange,
+            onValueChange = { onAmplitudeChange(it.toInt().toFloat()) },
             valueRange = 0f..5f,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("period $period", style = MaterialTheme.typography.labelMedium)
+        Text("period $period", style = MaterialTheme.typography.labelMedium.copy(fontSize = 18.sp))
         Slider(
             value = period,
-            onValueChange = onPeriodChange,
-            valueRange = 0.1f..5f,
+            onValueChange = { onPeriodChange(it.toInt().toFloat()) },
+            valueRange = 1f..5f,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("phase $phase", style = MaterialTheme.typography.labelMedium)
+        Text("phase $phase", style = MaterialTheme.typography.labelMedium.copy(fontSize = 18.sp))
         Slider(
             value = phase,
-            onValueChange = onPhaseChange,
-            valueRange = 0f..1f,
+            onValueChange = { onPhaseChange(it.toInt().toFloat()) },
+            valueRange = 0f..5f,
             modifier = Modifier.fillMaxWidth()
         )
     }

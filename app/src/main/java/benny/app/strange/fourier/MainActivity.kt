@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,15 +39,19 @@ class MainActivity : ComponentActivity() {
                     var period by remember { mutableFloatStateOf(1f) }
                     var phase by remember { mutableFloatStateOf(0f) }
 
+                    val animatedAmplitude by animateFloatAsState(targetValue = amplitude, label = "")
+                    val animatedPeriod by animateFloatAsState(targetValue = period, label = "")
+                    val animatedPhase by animateFloatAsState(targetValue = phase, label = "")
+
                     Box(modifier = Modifier.padding(innerPadding)) {
                         Column {
                             SineWave(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .weight(1f),
-                                amplitude = amplitude,
-                                period = period,
-                                phase = phase
+                                amplitude = animatedAmplitude,
+                                period = animatedPeriod,
+                                phase = animatedPhase
                             )
                             SineWaveControls(
                                 amplitude = amplitude,
