@@ -111,7 +111,7 @@ fun SineWave(
         drawPath(
             path = path,
             color = Color.Yellow,
-            style = Stroke(width = 2f)
+            style = Stroke(width = 4f)
         )
     }
 }
